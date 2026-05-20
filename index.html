@@ -14,7 +14,7 @@
             -webkit-user-select: none;
         }
         body {
-            background: radial-gradient(circle, #2c2505 0%, #0c0a01 100%);
+            background: radial-gradient(circle at center, #201a02 0%, #060500 100%);
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex;
@@ -23,35 +23,97 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            padding: 20px;
+            padding: 20px 15px;
         }
-        /* Yuqori Panel */
+        
+        /* Yuqori Profil Paneli */
         .header-panel {
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(44, 37, 5, 0.6);
-            padding: 12px;
-            border-radius: 16px;
-            border: 1px solid #ffcc0033;
+            background: rgba(32, 26, 2, 0.5);
+            padding: 10px 14px;
+            border-radius: 24px;
+            border: 1px solid #ffd7001a;
+            backdrop-filter: blur(10px);
         }
-        .user-info { display: flex; align-items: center; gap: 10px; }
-        .avatar { width: 40px; height: 40px; background: #ffcc00; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #000; }
-        .username { font-weight: bold; font-size: 14px; }
-        .stats { display: flex; gap: 10px; }
-        .stat-badge { background: rgba(0,0,0,0.4); padding: 6px 12px; border-radius: 20px; font-size: 13px; display: flex; align-items: center; gap: 5px; border: 1px solid #ffcc0022; }
+        .user-info { display: flex; align-items: center; gap: 12px; }
+        .avatar { 
+            width: 44px; 
+            height: 44px; 
+            background: linear-gradient(135deg, #1e3c72, #2a5298); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: bold; 
+            color: #fff;
+            border: 2px solid #ffd70033;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .username-block { display: flex; flex-direction: column; }
+        .coin-brand { font-size: 11px; color: #b59830; font-weight: bold; letter-spacing: 0.5px; }
+        .username { font-weight: bold; font-size: 14px; color: #fff; }
         
-        /* Balans */
+        .top-badges { display: flex; gap: 8px; }
+        .badge { 
+            background: rgba(0,0,0,0.5); 
+            padding: 6px 14px; 
+            border-radius: 20px; 
+            font-size: 13px; 
+            font-weight: bold;
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            border: 1px solid #ffd70015; 
+        }
+
+        /* Asosiy Balans Ko'rinishi */
         .balance-container {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 15px;
         }
-        .balance-title { font-size: 14px; color: #aaa; margin-bottom: 5px; }
-        .balance-value { font-size: 42px; font-weight: 800; color: #fff; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .balance-value img { width: 42px; height: 42px; }
+        .balance-value { 
+            font-size: 52px; 
+            font-weight: 800; 
+            color: #fff; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 12px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .mini-gold-coin {
+            width: 38px;
+            height: 38px;
+            background: radial-gradient(circle, #fff6d1, #ffd700, #aa8010);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: #fff;
+            font-size: 18px;
+            border: 2px solid #e6b800;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .tap-multiplier {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255,215,0,0.1);
+            color: #ffd700;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 8px;
+            border: 1px solid #ffd70022;
+        }
 
-        /* Tanga bosish joyi */
+        /* 3D Tanga Bosish Joyi */
         .coin-container {
             flex-grow: 1;
             display: flex;
@@ -61,61 +123,110 @@
             width: 100%;
         }
         .big-coin {
-            width: 240px;
-            height: 240px;
-            background: radial-gradient(circle, #ffe57f 0%, #ffb300 70%, #ff8f00 100%);
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle at 35% 35%, #fff9d6 0%, #ffdf00 25%, #d4af37 60%, #aa8010 90%, #5a4500 100%);
             border-radius: 50%;
-            box-shadow: 0 0 40px #ffb300aa, inset 0 0 20px #ffffffaa;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 110px;
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+            font-size: 140px;
+            font-weight: 950;
+            color: #ffffff;
+            font-family: 'Arial Black', Gadget, sans-serif;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.8), 
+                inset 0 6px 12px rgba(255, 255, 255, 0.8),
+                inset 0 -12px 30px rgba(0, 0, 0, 0.6),
+                0 0 60px rgba(255, 223, 0, 0.35);
             cursor: pointer;
             transition: transform 0.05s ease;
-            border: 8px solid #ffa000;
+            border: 12px solid #e5c100;
+            text-shadow: 
+                0 3px 5px rgba(0, 0, 0, 0.5),
+                3px 5px 0px #b38f10, 
+                5px 8px 0px #8a6d08,
+                8px 12px 20px rgba(0,0,0,0.7);
+        }
+        .big-coin::before {
+            content: '';
+            position: absolute;
+            width: 88%;
+            height: 88%;
+            border: 3px dashed rgba(255, 255, 255, 0.45);
+            border-radius: 50%;
+        }
+        .big-coin::after {
+            content: '✨';
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            font-size: 26px;
+            opacity: 0.85;
+            text-shadow: 0 0 12px #ffffff;
         }
         .big-coin:active { transform: scale(0.95); }
+
+        /* Kichik o'yin ostidagi tugmachalar */
+        .sub-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .sub-btn {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid #ffd70022;
+            padding: 8px 18px;
+            border-radius: 14px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #ffd700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
         /* Uchar +1 effektlari */
         .floating-text {
             position: absolute;
-            color: #fff;
-            font-size: 28px;
-            font-weight: bold;
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 900;
             pointer-events: none;
-            animation: floatUp 0.8s ease-out forwards;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            animation: floatUp 0.6s ease-out forwards;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.8);
         }
         @keyframes floatUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-120px) scale(1.2); }
+            100% { opacity: 0; transform: translateY(-140px) scale(1.3); }
         }
 
         /* Energiya paneli */
         .energy-container {
             width: 100%;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
-        .energy-text { display: flex; justify-content: space-between; font-size: 14px; font-weight: bold; margin-bottom: 6px; color: #ddd; }
-        .energy-bar { width: 100%; height: 14px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; border: 1px solid #ffcc0033; }
-        .energy-fill { width: 100%; height: 100%; background: linear-gradient(90deg, #ffb300, #ffcc00); transition: width 0.1s ease; }
+        .energy-text { display: flex; justify-content: space-between; font-size: 14px; font-weight: bold; margin-bottom: 8px; color: #ddd; }
+        .energy-num { color: #fff; font-size: 16px; font-weight: 800; }
+        .energy-num span { color: #888; font-size: 13px; font-weight: 400; }
+        .energy-bar { width: 100%; height: 14px; background: rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden; border: 1px solid #ffd70015; }
+        .energy-fill { width: 100%; height: 100%; background: linear-gradient(90deg, #e5c100, #ffeb3b); transition: width 0.1s ease; box-shadow: 0 0 10px #ffd70055; }
 
-        /* Pastki menyu */
+        /* Pastki Asosiy Navigatsiya Menyusi */
         .nav-menu {
             width: 100%;
             display: flex;
             justify-content: space-around;
-            background: rgba(20, 17, 3, 0.9);
-            padding: 10px 0;
-            border-radius: 16px;
-            border-top: 1px solid #ffcc0033;
+            background: linear-gradient(to top, rgba(10,8,1,0.95), rgba(25,20,3,0.9));
+            padding: 12px 0;
+            border-radius: 24px;
+            border-top: 1px solid #ffd70022;
         }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #888; font-size: 11px; cursor: pointer; text-decoration: none; }
-        .nav-item.active { color: #ffcc00; font-weight: bold; }
-        .nav-icon { font-size: 20px; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 5px; color: #757161; font-size: 10px; font-weight: bold; cursor: pointer; text-decoration: none; width: 20%; }
+        .nav-item.active { color: #ffd700; }
+        .nav-icon { font-size: 22px; filter: grayscale(100%); opacity: 0.6; }
+        .nav-item.active .nav-icon { filter: grayscale(0%); opacity: 1; }
     </style>
 </head>
 <body>
@@ -123,31 +234,37 @@
     <div class="header-panel">
         <div class="user-info">
             <div class="avatar" id="user-avatar">S</div>
-            <div>
-                <div class="username" id="user-name">Sxhrob</div>
-                <div style="font-size: 11px; color: #ffcc00;">YUMI COIN</div>
+            <div class="username-block">
+                <div class="coin-brand">YUMI COIN</div>
+                <div class="username" id="user-name">@sxhrob</div>
             </div>
         </div>
-        <div class="stats">
-            <div class="stat-badge">💎 <span id="diamond-count">0</span></div>
+        <div class="top-badges">
+            <div class="badge">🔷 <span id="diamond-count">1</span></div>
         </div>
     </div>
 
     <div class="balance-container">
-        <div class="balance-title">Sxhrob Coin Balansi</div>
         <div class="balance-value">
+            <div class="mini-gold-coin">Y</div>
             <span id="coin-count">0</span>
         </div>
+        <div class="tap-multiplier">📈 Tap x1</div>
     </div>
 
     <div class="coin-container" id="coin-box">
         <div class="big-coin" id="tap-btn">Y</div>
     </div>
 
+    <div class="sub-buttons">
+        <div class="sub-btn" onclick="alert('Tez kunda: mini o\'yinlar')">🎮 GAME</div>
+        <div class="sub-btn" onclick="alert('Tez kunda: do\'kon')">🏪 SHOP</div>
+    </div>
+
     <div class="energy-container">
         <div class="energy-text">
             <span>⚡ ENERGY</span>
-            <span id="energy-text-val">500/500</span>
+            <div class="energy-num"><span id="energy-now">500</span> <span>/500</span></div>
         </div>
         <div class="energy-bar">
             <div class="energy-fill" id="energy-fill-bar"></div>
@@ -155,49 +272,47 @@
     </div>
 
     <div class="nav-menu">
-        <div class="nav-item" onclick="alert('Tez kunda: Boost bo\'limi')">
+        <div class="nav-item" onclick="showSection('boost')">
             <span class="nav-icon">🚀</span><span>BOOST</span>
         </div>
-        <div class="nav-item" onclick="alert('Tez kunda: Vazifalar')">
+        <div class="nav-item" onclick="showSection('vazifalar')">
             <span class="nav-icon">📋</span><span>VAZIFALAR</span>
         </div>
-        <div class="nav-item active">
+        <div class="nav-item active" onclick="showSection('bosish')">
             <span class="nav-icon">🎯</span><span>BOSISH</span>
         </div>
-        <div class="nav-item" onclick="alert('Tez kunda: 1 kunlik aukshion')">
+        <div class="nav-item" onclick="showSection('aukshion')">
             <span class="nav-icon">⚖️</span><span>AUKSHION</span>
         </div>
-        <div class="nav-item" onclick="alert('Tez kunda: Profilingiz')">
+        <div class="nav-item" onclick="showSection('profil')">
             <span class="nav-icon">👤</span><span>PROFIL</span>
         </div>
     </div>
 
     <script>
-        // Telegram WebApp sozlamalari
         const tg = window.Telegram.WebApp;
-        tg.expand(); // Oynani to'liq ochish
+        tg.expand();
 
-        // Foydalanuvchi ismini Telegramdan olish
+        // Telegram ma'lumotlarini ulash
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             const user = tg.initDataUnsafe.user;
-            document.getElementById('user-name').innerText = user.first_name;
+            document.getElementById('user-name').innerText = user.username ? `@${user.username}` : user.first_name;
             document.getElementById('user-avatar').innerText = user.first_name.charAt(0).toUpperCase();
         }
 
-        // O'yin o'zgaruvchilari (Lokal xotirada saqlanadi)
+        // Ma'lumotlarni yuklash
         let coins = parseFloat(localStorage.getItem('coins')) || 0;
-        let diamonds = parseInt(localStorage.getItem('diamonds')) || 0;
+        let diamonds = parseInt(localStorage.getItem('diamonds')) || 1;
         let energy = parseInt(localStorage.getItem('energy')) || 500;
 
-        // Elementlarni yangilash
         function updateUI() {
             document.getElementById('coin-count').innerText = coins.toLocaleString();
             document.getElementById('diamond-count').innerText = diamonds;
-            document.getElementById('energy-text-val').innerText = `${energy}/500`;
+            document.getElementById('energy-now').innerText = energy;
             document.getElementById('energy-fill-bar').style.width = `${(energy / 500) * 100}%`;
         }
 
-        // Tanga bosilgandagi hodisa
+        // Tanga bosish hodisasi
         const tapBtn = document.getElementById('tap-btn');
         const coinBox = document.getElementById('coin-box');
 
@@ -209,46 +324,35 @@
                 localStorage.setItem('coins', coins);
                 localStorage.setItem('energy', energy);
                 updateUI();
-
-                // +1 effektini yaratish
                 createFloatingText(e.clientX, e.clientY);
                 
-                // Telefonni yengil titratish (Vibration)
                 if (tg.HapticFeedback) {
                     tg.HapticFeedback.impactOccurred('medium');
                 }
             } else {
-                if (tg.showPopup) {
-                    tg.showPopup({
-                        title: 'Energiya tugadi!',
-                        message: 'Energiyani to\'ldirish uchun Boost bo\'limidan 1 ta olmos evaziga sotib oling.',
-                        buttons: [{id: 'ok', type: 'ok'}]
-                    });
-                } else {
-                    alert('Energiya tugadi!');
-                }
+                alert("Energiya tugadi! Boost bo'limidan to'ldiring.");
             }
         });
 
-        // +1 animatsiya funksiyasi
         function createFloatingText(x, y) {
             const text = document.createElement('div');
             text.className = 'floating-text';
             text.innerText = '+1';
-            
-            // Bosilgan joy koordinatasini aniqlash
             const rect = coinBox.getBoundingClientRect();
-            text.style.left = `${x - rect.left - 10}px`;
-            text.style.top = `${y - rect.top - 20}px`;
-            
+            text.style.left = `${x - rect.left - 15}px`;
+            text.style.top = `${y - rect.top - 30}px`;
             coinBox.appendChild(text);
-            
-            setTimeout(() => {
-                text.remove();
-            }, 800);
+            setTimeout(() => { text.remove(); }, 600);
         }
 
-        // Energiyani har 3 soniyada 1 taga tiklash
+        // Dinamik menyu bo'limlari funksiyasi (Keyingi qadamda to'ldiramiz)
+        function showSection(name) {
+            if(name !== 'bosish') {
+                alert(`Tez kunda: ${name.toUpperCase()} bo'limi to'liq ishga tushadi!`);
+            }
+        }
+
+        // Energiyani tiklash
         setInterval(() => {
             if (energy < 500) {
                 energy += 1;
@@ -257,8 +361,8 @@
             }
         }, 3000);
 
-        // Birinchi marta yuklanganda UI ni yangilash
         updateUI();
     </script>
 </body>
 </html>
+
