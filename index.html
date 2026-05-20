@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sxhrob Coin - Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        body {
+            background: radial-gradient(circle, #2c2505 0%, #0c0a01 100%);
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            padding: 20px;
+        }
+        /* Yuqori Panel */
+        .header-panel {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(44, 37, 5, 0.6);
+            padding: 12px;
+            border-radius: 16px;
+            border: 1px solid #ffcc0033;
+        }
+        .user-info { display: flex; align-items: center; gap: 10px; }
+        .avatar { width: 40px; height: 40px; background: #ffcc00; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #000; }
+        .username { font-weight: bold; font-size: 14px; }
+        .stats { display: flex; gap: 10px; }
+        .stat-badge { background: rgba(0,0,0,0.4); padding: 6px 12px; border-radius: 20px; font-size: 13px; display: flex; align-items: center; gap: 5px; border: 1px solid #ffcc0022; }
+        
+        /* Balans */
+        .balance-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .balance-title { font-size: 14px; color: #aaa; margin-bottom: 5px; }
+        .balance-value { font-size: 42px; font-weight: 800; color: #fff; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .balance-value img { width: 42px; height: 42px; }
+
+        /* Tanga bosish joyi */
+        .coin-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+        }
+        .big-coin {
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle, #ffe57f 0%, #ffb300 70%, #ff8f00 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 40px #ffb300aa, inset 0 0 20px #ffffffaa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 110px;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: transform 0.05s ease;
+            border: 8px solid #ffa000;
+        }
+        .big-coin:active { transform: scale(0.95); }
+
+        /* Uchar +1 effektlari */
+        .floating-text {
+            position: absolute;
+            color: #fff;
+            font-size: 28px;
+            font-weight: bold;
+            pointer-events: none;
+            animation: floatUp 0.8s ease-out forwards;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-120px) scale(1.2); }
+        }
+
+        /* Energiya paneli */
+        .energy-container {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .energy-text { display: flex; justify-content: space-between; font-size: 14px; font-weight: bold; margin-bottom: 6px; color: #ddd; }
+        .energy-bar { width: 100%; height: 14px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; border: 1px solid #ffcc0033; }
+        .energy-fill { width: 100%; height: 100%; background: linear-gradient(90deg, #ffb300, #ffcc00); transition: width 0.1s ease; }
+
+        /* Pastki menyu */
+        .nav-menu {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            background: rgba(20, 17, 3, 0.9);
+            padding: 10px 0;
+            border-radius: 16px;
+            border-top: 1px solid #ffcc0033;
+        }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #888; font-size: 11px; cursor: pointer; text-decoration: none; }
+        .nav-item.active { color: #ffcc00; font-weight: bold; }
+        .nav-icon { font-size: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="header-panel">
+        <div class="user-info">
+            <div class="avatar" id="user-avatar">S</div>
+            <div>
+                <div class="username" id="user-name">Sxhrob</div>
+                <div style="font-size: 11px; color: #ffcc00;">YUMI COIN</div>
+            </div>
+        </div>
+        <div class="stats">
+            <div class="stat-badge">💎 <span id="diamond-count">0</span></div>
+        </div>
+    </div>
+
+    <div class="balance-container">
+        <div class="balance-title">Sxhrob Coin Balansi</div>
+        <div class="balance-value">
+            <span id="coin-count">0</span>
+        </div>
+    </div>
+
+    <div class="coin-container" id="coin-box">
+        <div class="big-coin" id="tap-btn">Y</div>
+    </div>
+
+    <div class="energy-container">
+        <div class="energy-text">
+            <span>⚡ ENERGY</span>
+            <span id="energy-text-val">500/500</span>
+        </div>
+        <div class="energy-bar">
+            <div class="energy-fill" id="energy-fill-bar"></div>
+        </div>
+    </div>
+
+    <div class="nav-menu">
+        <div class="nav-item" onclick="alert('Tez kunda: Boost bo\'limi')">
+            <span class="nav-icon">🚀</span><span>BOOST</span>
+        </div>
+        <div class="nav-item" onclick="alert('Tez kunda: Vazifalar')">
+            <span class="nav-icon">📋</span><span>VAZIFALAR</span>
+        </div>
+        <div class="nav-item active">
+            <span class="nav-icon">🎯</span><span>BOSISH</span>
+        </div>
+        <div class="nav-item" onclick="alert('Tez kunda: 1 kunlik aukshion')">
+            <span class="nav-icon">⚖️</span><span>AUKSHION</span>
+        </div>
+        <div class="nav-item" onclick="alert('Tez kunda: Profilingiz')">
+            <span class="nav-icon">👤</span><span>PROFIL</span>
+        </div>
+    </div>
+
+    <script>
+        // Telegram WebApp sozlamalari
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Oynani to'liq ochish
+
+        // Foydalanuvchi ismini Telegramdan olish
+        if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+            const user = tg.initDataUnsafe.user;
+            document.getElementById('user-name').innerText = user.first_name;
+            document.getElementById('user-avatar').innerText = user.first_name.charAt(0).toUpperCase();
+        }
+
+        // O'yin o'zgaruvchilari (Lokal xotirada saqlanadi)
+        let coins = parseFloat(localStorage.getItem('coins')) || 0;
+        let diamonds = parseInt(localStorage.getItem('diamonds')) || 0;
+        let energy = parseInt(localStorage.getItem('energy')) || 500;
+
+        // Elementlarni yangilash
+        function updateUI() {
+            document.getElementById('coin-count').innerText = coins.toLocaleString();
+            document.getElementById('diamond-count').innerText = diamonds;
+            document.getElementById('energy-text-val').innerText = `${energy}/500`;
+            document.getElementById('energy-fill-bar').style.width = `${(energy / 500) * 100}%`;
+        }
+
+        // Tanga bosilgandagi hodisa
+        const tapBtn = document.getElementById('tap-btn');
+        const coinBox = document.getElementById('coin-box');
+
+        tapBtn.addEventListener('click', (e) => {
+            if (energy >= 1) {
+                coins += 1;
+                energy -= 1;
+                
+                localStorage.setItem('coins', coins);
+                localStorage.setItem('energy', energy);
+                updateUI();
+
+                // +1 effektini yaratish
+                createFloatingText(e.clientX, e.clientY);
+                
+                // Telefonni yengil titratish (Vibration)
+                if (tg.HapticFeedback) {
+                    tg.HapticFeedback.impactOccurred('medium');
+                }
+            } else {
+                if (tg.showPopup) {
+                    tg.showPopup({
+                        title: 'Energiya tugadi!',
+                        message: 'Energiyani to\'ldirish uchun Boost bo\'limidan 1 ta olmos evaziga sotib oling.',
+                        buttons: [{id: 'ok', type: 'ok'}]
+                    });
+                } else {
+                    alert('Energiya tugadi!');
+                }
+            }
+        });
+
+        // +1 animatsiya funksiyasi
+        function createFloatingText(x, y) {
+            const text = document.createElement('div');
+            text.className = 'floating-text';
+            text.innerText = '+1';
+            
+            // Bosilgan joy koordinatasini aniqlash
+            const rect = coinBox.getBoundingClientRect();
+            text.style.left = `${x - rect.left - 10}px`;
+            text.style.top = `${y - rect.top - 20}px`;
+            
+            coinBox.appendChild(text);
+            
+            setTimeout(() => {
+                text.remove();
+            }, 800);
+        }
+
+        // Energiyani har 3 soniyada 1 taga tiklash
+        setInterval(() => {
+            if (energy < 500) {
+                energy += 1;
+                localStorage.setItem('energy', energy);
+                updateUI();
+            }
+        }, 3000);
+
+        // Birinchi marta yuklanganda UI ni yangilash
+        updateUI();
+    </script>
+</body>
+</html>
